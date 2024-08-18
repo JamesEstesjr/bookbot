@@ -4,7 +4,12 @@ def main():
     text = book_text(book_path)
     num_words = word_count(text)
     letter_dict = letters(text)
-    print (f"word_count {num_words} and the letter counts are {letter_dict}")  
+    sorted_let = letter_counts(letter_dict)
+    print(f"Report on {book_path}")
+    print()
+    print("The letter counts are:")
+    for i in sorted_let:
+        print(i)
         #print(book.read())
 
 #should take the total of text and convert it into letters then make a dict that tells what amount of letters there are
@@ -33,5 +38,13 @@ def book_text(book_path):
         book = books.read()
         return book
 
+def letter_counts(letter_dict):
+    # Convert dictionary to a list of tuples (letter, count)
+    unordered_letters = [(letter, count) for letter, count in letter_dict.items() if letter.isalpha()]
+    
+    # Sort the list by count in descending order
+    sorted_letters = sorted(unordered_letters, key=lambda x: x[1], reverse=True)
+    
+    return sorted_letters
 #should be the only thing to activate. calls on the main function at the top
 main()
